@@ -18,7 +18,7 @@ class ProductTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 200,
+            height: 220,
             width: double.maxFinite,
             decoration: BoxDecoration(
                 image: DecorationImage(
