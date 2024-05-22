@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:grocery_bloc/views/home/bloc/home_bloc.dart';
+import 'package:grocery_bloc/views/home/bloc/home_bloc.dart';
 import 'package:grocery_bloc/views/home/models/product_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductTile extends StatelessWidget {
   final ProductModel productModel;
-  const ProductTile({super.key, required this.productModel});
+  final HomeBloc homeBloc;
+  const ProductTile({super.key, required this.productModel, required this.homeBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,12 @@ class ProductTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 220,
+            height: 0,
             width: double.maxFinite,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(productModel.imageUrl))),
+                    image: CachedNetworkImageProvider(productModel.imageUrl))),
           ),
           const SizedBox(height: 20),
           Text(productModel.name,
@@ -39,14 +41,14 @@ class ProductTile extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {
-                        // homeBloc.add(HomeProductWishlistButtonClickedEvent(
-                        //     clickedProduct: productModel));
+                        homeBloc.add(HomeProductWishlistButtonClickedEvent(
+                            clickedProduct: productModel));
                       },
                       icon: Icon(Icons.favorite_border)),
                   IconButton(
                       onPressed: () {
-                        // homeBloc.add(HomeProductCartButtonClickedEvent(
-                        //     clickedProduct: productModel));
+                        homeBloc.add(HomeProductCartButtonClickedEvent(
+                            clickedProduct: productModel));
                       },
                       icon: Icon(Icons.shopping_bag_outlined)),
                 ],
